@@ -204,6 +204,3 @@ fun ruSentence(sentence: String, verb: Verb?): String {
     return (if (subject != null) "$subject · " else "") +
         "${verb.ru}. Перевод остальных слов зависит от контекста."
 }
-
-    }
-}
