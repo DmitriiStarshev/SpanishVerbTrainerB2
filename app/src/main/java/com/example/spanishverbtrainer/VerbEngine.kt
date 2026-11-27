@@ -172,12 +172,38 @@ object VerbEngine {
         }
         return null
     }
-    fun ruSentence(sentence:String, verb:Verb?):String {
-        if(verb==null) return "Перевод предложения пока не распознан. Попробуйте глагол из встроенного словаря."
-        val words=mapOf("yo" to "я","tú" to "ты","él" to "он","ella" to "она","nosotros" to "мы",
-            "vosotros" to "вы","ellos" to "они","ayer" to "вчера","hoy" to "сегодня","mañana" to "завтра",
-            "sushi" to "суши","mucho" to "много","bien" to "хорошо","aquí" to "здесь")
-        val subject=sentence.lowercase().split(Regex("\\s+")).firstOrNull()?.trim(".,!?¿¡")?.let{words[it]}
-        return (if(subject!=null) "$subject · " else "") + "${verb.ru}. Перевод остальных слов зависит от контекста."
+    
+fun ruSentence(sentence: String, verb: Verb?): String {
+    if (verb == null) {
+        return "Перевод предложения пока не распознан. Попробуйте глагол из встроенного словаря."
+    }
+
+    val words = mapOf(
+        "yo" to "я",
+        "tú" to "ты",
+        "él" to "он",
+        "ella" to "она",
+        "nosotros" to "мы",
+        "vosotros" to "вы",
+        "ellos" to "они",
+        "ayer" to "вчера",
+        "hoy" to "сегодня",
+        "mañana" to "завтра",
+        "sushi" to "суши",
+        "mucho" to "много",
+        "bien" to "хорошо",
+        "aquí" to "здесь"
+    )
+
+    val subject = sentence.lowercase()
+        .split(Regex("\\s+"))
+        .firstOrNull()
+        ?.trim('.', ',', '!', '?', '¿', '¡')
+        ?.let { words[it] }
+
+    return (if (subject != null) "$subject · " else "") +
+        "${verb.ru}. Перевод остальных слов зависит от контекста."
+}
+
     }
 }
